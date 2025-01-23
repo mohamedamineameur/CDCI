@@ -1,0 +1,30 @@
+name: Docker Build and Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Cloner le dépôt
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Configurer Docker
+      - name: Log in to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # Construire l'image Docker
+      - name: Build Docker Image
+        run: docker build -t your-dockerhub-username/express-app:latest .
+
+      # Pousser l'image sur DockerHub
+      - name: Push Docker Image
+        run: docker push your-dockerhub-username/express-app:latest
