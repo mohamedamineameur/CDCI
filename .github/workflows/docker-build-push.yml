@@ -14,17 +14,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Configurer Docker
+      # Se connecter à Docker Hub
       - name: Log in to DockerHub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKER_USERNAME }}  # Votre nom d'utilisateur Docker Hub
+          password: ${{ secrets.DOCKER_PASSWORD }}  # Votre token d'accès Docker Hub
 
       # Construire l'image Docker
       - name: Build Docker Image
-        run: docker build -t your-dockerhub-username/express-app:latest .
+        run: docker build -t aminefaw/express-app:latest .
 
-      # Pousser l'image sur DockerHub
+      # Pousser l'image vers Docker Hub
       - name: Push Docker Image
-        run: docker push your-dockerhub-username/express-app:latest
+        run: docker push aminefaw/express-app:latest
